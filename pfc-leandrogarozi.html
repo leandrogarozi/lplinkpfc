@@ -218,6 +218,7 @@ footer{padding:2rem 3rem;border-top:1px solid var(--border);display:flex;align-i
   .about-title{font-size:var(--m-size-about-title, clamp(2rem,7vw,3rem))!important}
   .hero-content{padding-top:var(--m-pad-hero-top, 3.5rem)!important;padding-bottom:var(--m-pad-hero-bottom, 4rem)!important}
   .hero-panorama{height:56.25vw!important;min-height:180px}
+  nav,nav.scrolled{background:transparent!important;backdrop-filter:none!important;border-bottom:none!important}
   .stat-n{font-size:var(--m-stat-size, 2.2rem)!important}
   .about-inner{padding:var(--m-about-pad, 3rem 1.5rem)!important;grid-template-columns:1fr!important;gap:2rem!important}
   .method{padding:var(--m-method-pad, 4rem 1.5rem)!important}
@@ -1121,8 +1122,6 @@ if(urlLink)document.getElementById('cta').href=decodeURIComponent(urlLink);
 
 // Nav
 window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('scrolled',scrollY>60));
-// Safari fix: define estado inicial da nav sem esperar o evento de scroll
-document.getElementById('nav').classList.toggle('scrolled', scrollY > 60);
 
 // Export HTML with current state baked in
 function exportHTML(){
