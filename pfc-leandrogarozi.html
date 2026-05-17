@@ -1121,6 +1121,8 @@ if(urlLink)document.getElementById('cta').href=decodeURIComponent(urlLink);
 
 // Nav
 window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('scrolled',scrollY>60));
+// Safari fix: define estado inicial da nav sem esperar o evento de scroll
+document.getElementById('nav').classList.toggle('scrolled', scrollY > 60);
 
 // Export HTML with current state baked in
 function exportHTML(){
