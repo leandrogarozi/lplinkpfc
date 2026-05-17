@@ -1109,7 +1109,8 @@ Movimento sem percepção é impulso. Percepção sem movimento é paralisia. A 
 <script>
 // URL params
 const P=new URLSearchParams(window.location.search);
-const urlNome=P.get('nome'),urlLink=P.get('link');
+const urlNome=P.get('nome'),urlLink=P.get('link'),urlYtPos=P.get('ytpos');
+if(urlYtPos) document.documentElement.style.setProperty('--yt-mobile-pos', decodeURIComponent(urlYtPos));
 if(urlNome||urlLink){
   // Client mode — hide editor controls
   document.getElementById('editor-btn').style.display='none';
@@ -1700,7 +1701,8 @@ function previewLink(){
   const prev=document.getElementById('link-preview');
   if(!nome&&!link){prev.textContent='Preencha os campos acima.';return;}
   const base=window.location.href.split('?')[0];
-  const url=`${base}?nome=${encodeURIComponent(nome||'')}${link?'&link='+encodeURIComponent(link):''}`;
+  const ytpos=getComputedStyle(document.documentElement).getPropertyValue('--yt-mobile-pos').trim()||'-25%';
+  const url=`${base}?nome=${encodeURIComponent(nome||'')}${link?'&link='+encodeURIComponent(link):''}&ytpos=${encodeURIComponent(ytpos)}`;
   prev.textContent=url;
   if(nome){document.getElementById('cg').style.display='block';document.getElementById('cn').textContent=nome.toUpperCase();}
   else document.getElementById('cg').style.display='none';
@@ -1711,7 +1713,8 @@ function copyClientLink(){
   const link=document.getElementById('c-link').value.trim();
   if(!nome||!link){alert('Preencha o nome e o link do assessment primeiro.');return;}
   const base=window.location.href.split('?')[0];
-  const url=`${base}?nome=${encodeURIComponent(nome)}&link=${encodeURIComponent(link)}`;
+  const ytpos=getComputedStyle(document.documentElement).getPropertyValue('--yt-mobile-pos').trim()||'-25%';
+  const url=`${base}?nome=${encodeURIComponent(nome)}&link=${encodeURIComponent(link)}&ytpos=${encodeURIComponent(ytpos)}`;
   navigator.clipboard.writeText(url).then(()=>{
     const btn=document.getElementById('ep-copy-btn');
     btn.textContent='Link copiado ✓';btn.classList.add('ok');
