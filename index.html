@@ -1522,7 +1522,7 @@ function loadImg(e,cid,phid){
 let currentSlide=0;
 let slides=[];
 // Restore slides baked in by exportHTML (will call renderCarousel after all functions load)
-const _restoreSlides=window._sd&&window._sd.length;
+// Restore slides after all scripts have loaded (setTimeout ensures _slides_data runs first)
 
 function addPrints(e){
   const files=Array.from(e.target.files);if(!files.length)return;
@@ -1784,18 +1784,23 @@ document.addEventListener('keydown',e=>{
   if(e.key==='ArrowRight')lbNext();
 });
 // Restore exported slides and re-render carousel with click handlers
-if(_restoreSlides){slides=window._sd;renderCarousel();renderPrintManager();}
-else{
-  // Attach click listeners to any static carousel cards baked into HTML
-  const staticCards=document.querySelectorAll('#carousel-stage .c-card');
-  if(staticCards.length){
-    staticCards.forEach((card,i)=>{
-      const img=card.querySelector('img');
-      if(img){slides.push(img.src);}
-    });
-    if(slides.length){renderCarousel();renderPrintManager();}
+setTimeout(()=>{
+  if(window._sd&&window._sd.length){
+    slides=window._sd;
+    currentSlide=0;
+    renderCarousel();
+    renderPrintManager();
+  } else {
+    const staticCards=document.querySelectorAll('#carousel-stage .c-card');
+    if(staticCards.length){
+      staticCards.forEach((card,i)=>{
+        const img=card.querySelector('img');
+        if(img){slides.push(img.src);}
+      });
+      if(slides.length){renderCarousel();renderPrintManager();}
+    }
   }
-}
+}, 0);
 </script>
 
 
