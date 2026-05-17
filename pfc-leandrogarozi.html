@@ -872,6 +872,13 @@ Te vejo em breve!</textarea></div>
         <p style="font-size:.65rem;color:rgba(255,255,255,.3);line-height:1.6;letter-spacing:.04em">Esses controles só afetam telas menores que 900px. O desktop não é alterado.</p>
       </div>
       <div class="ep-section">
+        <div class="ep-section-title">🎬 Vídeo — posição no celular</div>
+        <div class="ep-slider-row">
+          <div class="ep-slider-label-row"><span class="ep-label">Mover vídeo ↑ cima / ↓ baixo</span><span class="ep-slider-val" id="yt-pos-val">Centro</span></div>
+          <input type="range" min="-50" max="0" value="-25" oninput="setYtMobilePos(this.value)">
+        </div>
+      </div>
+      <div class="ep-section">
         <div class="ep-section-title">Ordem dos blocos no mobile</div>
         <p style="font-size:.62rem;color:rgba(255,255,255,.3);line-height:1.6;margin-bottom:.8rem">Escolha qual bloco aparece primeiro em celular.</p>
         <div class="ep-row">
@@ -932,10 +939,6 @@ Te vejo em breve!</textarea></div>
 
       <div class="ep-section">
         <div class="ep-section-title">Espaçamentos</div>
-        <div class="ep-slider-row">
-          <div class="ep-slider-label-row"><span class="ep-label">Posição vertical do vídeo (mobile)</span><span class="ep-slider-val" id="yt-pos-val">Centro</span></div>
-          <input type="range" min="-50" max="0" value="-25" oninput="setYtMobilePos(this.value)">
-        </div>
         <div class="ep-slider-row">
           <div class="ep-slider-label-row"><span class="ep-label">Altura da foto panorâmica</span><span class="ep-slider-val" id="m-pan-val">48vh</span></div>
           <input type="range" min="25" max="80" value="45" oninput="setMobileRaw('--m-pan-height', this.value+'vh', 'm-pan-val')">
