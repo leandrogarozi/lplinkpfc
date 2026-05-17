@@ -228,7 +228,7 @@ footer{padding:2rem 3rem;border-top:1px solid var(--border);display:flex;align-i
   #about-body-el{max-width:100%!important}
   #about-right-block{transform:none!important}
   .m-steps{max-width:100%!important}
-  .hero-panorama iframe{width:100%!important;height:100%!important;min-width:unset!important;min-height:unset!important;top:0!important;left:0!important;transform:none!important}
+  .hero-panorama iframe{width:100%!important;height:150%!important;min-width:unset!important;min-height:unset!important;top:var(--yt-mobile-pos,-25%)!important;left:0!important;transform:none!important}
 }
 
 /* mobile order swap */
@@ -933,6 +933,10 @@ Te vejo em breve!</textarea></div>
       <div class="ep-section">
         <div class="ep-section-title">Espaçamentos</div>
         <div class="ep-slider-row">
+          <div class="ep-slider-label-row"><span class="ep-label">Posição vertical do vídeo (mobile)</span><span class="ep-slider-val" id="yt-pos-val">Centro</span></div>
+          <input type="range" min="-50" max="0" value="-25" oninput="setYtMobilePos(this.value)">
+        </div>
+        <div class="ep-slider-row">
           <div class="ep-slider-label-row"><span class="ep-label">Altura da foto panorâmica</span><span class="ep-slider-val" id="m-pan-val">48vh</span></div>
           <input type="range" min="25" max="80" value="45" oninput="setMobileRaw('--m-pan-height', this.value+'vh', 'm-pan-val')">
         </div>
@@ -1251,6 +1255,12 @@ document.addEventListener('DOMContentLoaded', ()=>{
 });
 
 // Mobile CSS variable helpers
+function setYtMobilePos(v){
+  const pct = parseFloat(v);
+  document.documentElement.style.setProperty('--yt-mobile-pos', pct+'%');
+  const label = document.getElementById('yt-pos-val');
+  if(label) label.textContent = pct === 0 ? 'Topo' : pct === -50 ? 'Base' : pct < -20 ? 'Baixo' : pct < -10 ? 'Centro' : 'Cima';
+}
 function setMobile(varName, val, unit, labelId, [base1, base2, base3]){
   const scale = val/100;
   const value = `clamp(${(base1*scale).toFixed(2)}rem,${(base2*scale).toFixed(1)}vw,${(base3*scale).toFixed(2)}rem)`;
