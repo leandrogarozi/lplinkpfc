@@ -1111,7 +1111,7 @@ Movimento sem percepção é impulso. Percepção sem movimento é paralisia. A 
 // URL params
 const P=new URLSearchParams(window.location.search);
 const urlNome=P.get('nome'),urlLink=P.get('link'),urlYtPos=P.get('ytpos');
-if(urlYtPos) document.documentElement.style.setProperty('--yt-mobile-pos', decodeURIComponent(urlYtPos));
+if(urlYtPos) document.documentElement.style.setProperty('--yt-mobile-pos', urlYtPos);
 if(urlNome||urlLink){
   // Client mode — hide editor controls
   document.getElementById('editor-btn').style.display='none';
